@@ -1,0 +1,27 @@
+img {
+  width: 80px;
+  height: 80px;
+}
+
+#tez {
+  width: 30px;
+  height: 30px;
+}
+
+button {
+  margin-right: 0.5cm;
+}
+
+Link {
+  margin-right: 1cm;
+}
+
+#navbar {
+  border-bottom: 1px solid lightblue;
+  margin-bottom: 0.5cm;
+}
+
+#logo {
+  margin: auto;
+  margin-right: 32vw;
+}

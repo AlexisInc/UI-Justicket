@@ -69,7 +69,7 @@ const CreateConcert =  ()=> {
         
         
         <Button id="submit" variant="primary" type="submit">
-            Submit
+            Créer
         </Button>
         </Form>
         </Formik>

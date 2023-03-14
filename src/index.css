@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Fugaz+One");
+@import url("https://fonts.google.com/specimen/Source+Sans+Pro");
 
 body {
   margin: 0;
@@ -18,4 +19,8 @@ h1 {
   text-align: center;
   font-family: "Fugaz One", cursive;
   margin-top: 1cm;
+}
+
+*{
+  font-family: "Source Sans Pro";
 }

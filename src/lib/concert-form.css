@@ -4,7 +4,11 @@
 }
 
 #submit {
-  margin-top: 0.5cm;
+  background-color: #0C296B;
+  margin: 0.5em auto;
+  display: flex;
+  border-color: #0C296B;
+  padding: 10px 50px;
 }
 
 .input {
@@ -14,4 +18,12 @@
 h3 {
   margin-bottom: 0.5cm;
   font-family: "Fugaz One", cursive;
+}
+
+div.input{
+  color: #EA4949;
+}
+
+div.input p{
+  color: #000000;
 }

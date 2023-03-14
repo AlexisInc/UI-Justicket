@@ -57,7 +57,7 @@ useEffect(() => {
       <Nav id="nav" className="me-auto">
         <Link  to='administration' style={linkStyle} >Administration</Link>
 
-        <Link  to='billet' style={linkStyle} >Billet </Link>
+        <Link  to='billet' style={linkStyle} >Mes billets </Link>
         <Link to='concert' style={linkStyle}>Concerts</Link>
 
 

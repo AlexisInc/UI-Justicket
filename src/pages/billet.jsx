@@ -2,7 +2,7 @@
 
 const Billet = ()=>{
     return (
-        <h1>Billets</h1>
+        <h1>Mes billets</h1>
         
     );
 }

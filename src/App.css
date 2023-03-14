@@ -28,6 +28,17 @@
   color: #61dafb;
 }
 
+.concerts {
+  padding: 0 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px 2em;
+}
+
+.concert{
+  /*margin: 10px;*/
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

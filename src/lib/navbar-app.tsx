@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './navbar-app.css'
+// @ts-ignore
 import ConnectButton from '../ConnectWallet.tsx';
 import { useEffect, useState } from 'react';
 import { NetworkType } from '@airgap/beacon-sdk';
@@ -62,15 +63,17 @@ useEffect(() => {
 
 
       </Nav>
-      <img id="logo" src="/images/logo.png"/>
+      <img id="logo" src="/images/logo.png" alt="Logo de Justicket"/>
 
       <ConnectButton
               Tezos={Tezos}
               setUserAddress={setUserAddress}
               setUserBalance={setUserBalance}
               wallet={wallet}
-    />
-            <Button variant="light" ><img  id="tez" src="/images/login.png"/></Button>
+      />
+      <Button variant="light" >
+        <img  id="tez" src="/images/login.png" alt="Bouton pour aller sur votre compte"/>
+      </Button>
 
 
     </Container>

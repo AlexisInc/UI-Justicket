@@ -35,8 +35,20 @@
   gap: 10px 2em;
 }
 
+.billets {
+  /* border: 1px solid #ccc; */
+  padding: 0 10px;
+  margin: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 2em;
+}
+.billet{
+  margin: 10px;
+}
+
 .concert{
-  /*margin: 10px;*/
+  /* margin: 10px; */
 }
 
 @keyframes App-logo-spin {

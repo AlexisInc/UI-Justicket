@@ -9,14 +9,14 @@ import { Concert } from '../model/concert';
 const CreateConcert =  ()=> {
 
     const initialFormState : Concert = {
-    name: '',
-    artiste: '',
-    salle :'',
-    places : null,
-    date: null,
-    price :null,
+        title: "",
+        artist: "",
+        capacity: 0,
+        date: new Date(),
+        place: "",
+        priceTezos: 0,
+        contractAddress: null
 
-    
     };
     const navigate = useNavigate();
 
@@ -36,19 +36,19 @@ const CreateConcert =  ()=> {
         <Formik
         initialValues={initialFormState}
         validationSchema={Yup.object({
-        name: Yup.string()
+        title: Yup.string()
         .max(30, 'Must be 30 characters or less')
         .required('Required'),
-        artiste: Yup.string()
+        artist: Yup.string()
         .min(3, 'Must be 3 characters or less')
         .required('Required'),
         salle: Yup.string()
         .max(30, 'Must be 30 characters or less')
         .required('Required'),
-        places: Yup.number()
+        place: Yup.number()
         .min(100, 'Must be 100 or more')
         .required('Required'),
-        prix: Yup.number()
+        priceTezos: Yup.number()
         .min(0, 'Must be 0 or more')
         .required('Required'),
         date: Yup.date()
@@ -60,32 +60,32 @@ const CreateConcert =  ()=> {
     
         >
         <Form className="needs-validation"  >
-        <div className="input" ><p class="form-title">Nom du concert : </p>
-        <Field placeHolder="Nom du concert" className="form-control" name="name" type="text" />
-        <ErrorMessage className="invalid-feedback" name="name" />
+        <div className="input" ><p className="form-title">Nom du concert : </p>
+        <Field placeHolder="Nom du concert" className="form-control" name="title" type="text" />
+        <ErrorMessage className="invalid-feedback" name="tile" />
         </div>
-        <div className="input" ><p class="form-title">Artiste du concert : </p>
-        <Field placeHolder="Artiste" className="form-control" name="artiste" type="text" />
-        <ErrorMessage className="invalid-feedback" name="artiste" />
+        <div className="input" ><p className="form-title">Artiste du concert : </p>
+        <Field placeHolder="Artiste" className="form-control" name="artist" type="text" />
+        <ErrorMessage className="invalid-feedback" name="artist" />
         </div>
-        <div className="input"><p class="form-title">Salle du concert : </p>
+        <div className="input"><p className="form-title">Salle du concert : </p>
         <Field  placeHolder="Salle"  className="form-control" name="salle" type="text" />
         <ErrorMessage className="invalid-feedback" name="salle" />
         </div>
 
-        <div className="input"><p class="form-title">Nombre de place du concert : </p>
-        <Field  placeHolder="Nombre de places"  className="form-control" name="places" type="number" />
-        <ErrorMessage className="invalid-feedback" name="places" />
+        <div className="input"><p className="form-title">Nombre de place du concert : </p>
+        <Field  placeHolder="Nombre de places"  className="form-control" name="place" type="string" />
+        <ErrorMessage className="invalid-feedback" name="place" />
         </div>
 
-        <div className="input"><p class="form-title">Date du concert : </p>
+        <div className="input"><p className="form-title">Date du concert : </p>
         <Field  placeHolder="Date"  className="form-control" name="date" type="Date" />
         <ErrorMessage className="invalid-feedback" name="date" />
         </div>
 
-        <div className="input"><p class="form-title">Prix du concert : </p>
-        <Field  placeHolder="Prix (XTZ)"  className="form-control" name="price" type="number" />
-        <ErrorMessage className="invalid-feedback" name="price" />
+        <div className="input"><p className="form-title">Prix du concert : </p>
+        <Field  placeHolder="Prix (XTZ)"  className="form-control" name="priceTezos" type="number" />
+        <ErrorMessage className="invalid-feedback" name="priceTezos" />
         </div>
         
         

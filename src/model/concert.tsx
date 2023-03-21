@@ -1,15 +1,12 @@
 
 export type Concert =   {
-    name : string,
-    artiste: string,
-    salle : string,
-    places : number,
-    date : Date,
-    price : number,
-
-
-    
-
+    title: string,
+    artist: string,
+    capacity: number,
+    date: Date,
+    place: string,
+    priceTezos: number,
+    contractAddress?: string
 
 }
 

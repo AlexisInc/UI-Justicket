@@ -1,5 +1,10 @@
 import { Button, Card } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { billetSelector } from '../reducer.ts';
 const Billet = ()=>{
+
+    const billets = useSelector(billetSelector);
+
     return (
         <>
         <h1>Mes billets</h1>

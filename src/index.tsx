@@ -3,9 +3,9 @@ import * as ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App.tsx';
 import { BrowserRouter,  Routes ,Route} from 'react-router-dom';
-import Billet from './pages/billet';
+import Billet from './pages/billet.tsx';
 import Admin from './pages/administration.tsx';
-import Concert from './pages/concert';
+import Concert from './pages/concert.tsx';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
@@ -13,6 +13,7 @@ root.render(
   <React.StrictMode>
       <BrowserRouter>
       <Routes>
+
         <Route path='/' element={<App/>} >
 
         <Route path='billet' element={<Billet/>} />

@@ -1,4 +1,5 @@
 import { Button, Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const Concert = ()=>{
     return (
@@ -18,6 +19,9 @@ const Concert = ()=>{
                       <Card.Text>
                           Prix du concert en Tz
                       </Card.Text>
+                      <Link to="/concert-info">
+                           <Button variant="primary">Acheter un billet</Button>
+                      </Link>
                       <Button variant="primary">Acheter un billet</Button>
                   </Card.Body>
               </Card>

@@ -6,6 +6,7 @@ import { BrowserRouter,  Routes ,Route} from 'react-router-dom';
 import Billet from './pages/billet';
 import Admin from './pages/administration.tsx';
 import Concert from './pages/concert';
+import ConcertInfo from './pages/concert-info';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
@@ -18,6 +19,7 @@ root.render(
         <Route path='billet' element={<Billet/>} />
         <Route path='administration' element={<Admin/>} />
         <Route path='concert' element={<Concert/>} />
+        <Route path="concert-info/:id" element={<ConcertInfo/>} />
 
 
        </Route>

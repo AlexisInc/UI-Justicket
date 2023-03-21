@@ -3,9 +3,9 @@ import * as ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App.tsx';
 import { BrowserRouter,  Routes ,Route} from 'react-router-dom';
-import Billet from './pages/billet.tsx';
+import Billet from './pages/billet.jsx';
 import Admin from './pages/administration.tsx';
-import Concert from './pages/concert.tsx';
+import Concert from './pages/concert.jsx';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);

@@ -1,10 +1,10 @@
 import { Button, Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { concerttSelector } from "../reducer.ts";
+import { concertSelector } from "../reducer.ts";
 
 const Concert = ()=>{
 
-    const concerts = useSelector(concerttSelector);
+    const concerts = useSelector(concertSelector);
 
     return (
       <>

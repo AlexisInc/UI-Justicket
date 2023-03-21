@@ -4,6 +4,7 @@ import "./App.css";
 import NavbarApp   from "./lib/navbar-app.tsx";
 import { Outlet} from 'react-router-dom';
 import { Provider } from "react-redux";
+// @ts-ignore
 import { store } from "./store.ts";
 
 function App() {

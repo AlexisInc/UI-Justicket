@@ -39,8 +39,21 @@ export const billetSelector= (state: State) => {
   return state.billet;
 };
 
-export const concerttSelector= (state: State) => {
-  
+export const concertSelector= (state: State) => {
+  if (state.concert.length == 0)
+    for (let i = 1; i < 9; i++) {
+      state.concert.push(
+        {
+          title : "Titre  test " + i,
+          artist: 'Artiste test ' + i,
+          capacity: 10,
+          date: undefined,
+          place: '',
+          priceTezos: 10
+        }
+      )
+    }
+
   return state.concert;
 };
 

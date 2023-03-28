@@ -1,5 +1,12 @@
 import { Concert } from "./model/concert";
-import { CreateConcert, GetBillet, PostConcert, PostConcertCommit, PostConcertRollback } from "./type/action.type";
+import {
+    CreateConcert,
+    GetBillet, IsAdmin,
+    PostConcert,
+    PostConcertCommit,
+    PostConcertRollback,
+    WalletConnection
+} from "./type/action.type";
 
 
 
@@ -16,3 +23,6 @@ export const postConcert = (concert:Concert): PostConcert => ({
 
   export const postConcertRollback = (error: Error): PostConcertRollback=> ({ type: 'POST_CONCERT_ROLLBACK', error });
   export const getBillet= (): GetBillet=> ({ type: 'FETCH_BILLET' });
+
+  export const walletConnection = (address:string, balance:number): WalletConnection=> ({ type: 'WALLET_CONNECTION', address, balance });
+  export const isAdmin= (isAdmin:boolean): IsAdmin=> ({ type: 'IS_ADMIN', isAdmin });

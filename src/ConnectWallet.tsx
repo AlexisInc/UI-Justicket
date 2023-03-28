@@ -35,6 +35,7 @@ const ConnectButton = ({
         }
     };
 
+
     return (
 
         <Button variant="light" onClick={connectWallet}><img  id="tez" src="/images/tezos.png" alt="Logo Tezos"/></Button>

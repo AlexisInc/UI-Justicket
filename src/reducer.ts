@@ -10,6 +10,9 @@ import { Loop, liftState } from 'redux-loop';
 export type State = {
   concert : Concert[],
   billet : any,
+    isAdmin : boolean,
+    userAddress : string,
+    userBalance : number
 }
 
 export const defaultState: State = {
@@ -26,7 +29,11 @@ const reducer = (state: State | undefined, action: Actions)  => {
       const newConcerts = state.concert;
       newConcerts.push(action.concert);
       return { ...state, concerts: newConcerts};
-    
+    case 'IS_ADMIN':
+        return { ...state, isAdmin: action.isAdmin};
+    case 'WALLET_CONNECTION':
+        return { ...state, userAddress: action.address, userBalance: action.balance};
+
 
 
     default:
@@ -37,6 +44,18 @@ const reducer = (state: State | undefined, action: Actions)  => {
 export const billetSelector= (state: State) => {
   
   return state.billet;
+};
+
+export const balanceSelector= (state: State) => {
+    return state.userBalance;
+};
+
+export const addressSelector= (state: State) => {
+    return state.userAddress;
+};
+
+export const adminSelector= (state: State) => {
+    return state.isAdmin;
 };
 
 export const concertSelector= (state: State) => {

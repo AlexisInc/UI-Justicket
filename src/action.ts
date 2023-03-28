@@ -1,7 +1,8 @@
 import { Concert } from "./model/concert";
 import {
     CreateConcert,
-    GetBillet, IsAdmin,
+    GetBillet, 
+    IsAdminAction,
     PostConcert,
     PostConcertCommit,
     PostConcertRollback,
@@ -25,4 +26,4 @@ export const postConcert = (concert:Concert): PostConcert => ({
   export const getBillet= (): GetBillet=> ({ type: 'FETCH_BILLET' });
 
   export const walletConnection = (address:string, balance:number): WalletConnection=> ({ type: 'WALLET_CONNECTION', address, balance });
-  export const isAdmin= (isAdmin:boolean): IsAdmin=> ({ type: 'IS_ADMIN', isAdmin });
+  export const isAdminAction= (isAdmin:boolean): IsAdminAction=> ({ type: 'IS_ADMIN', isAdmin });

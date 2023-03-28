@@ -7,7 +7,7 @@ export type PostConcertCommit = { type: 'POST_CONCERT_COMMIT'; payload: Concert 
 export type PostConcertRollback = { type: 'POST_CONCERT_ROLLBACK'; error: Error };
 export type GetBillet= { type: 'FETCH_BILLET' };
 export type WalletConnection= { type: 'WALLET_CONNECTION'; address:string, balance:number };
-export type IsAdmin= { type: 'IS_ADMIN'; isAdmin:boolean };
+export type IsAdminAction= { type: 'IS_ADMIN'; isAdmin:boolean };
 
 
 export type Actions =
@@ -17,7 +17,7 @@ export type Actions =
   | PostConcertRollback
   | GetBillet
   | WalletConnection
-  | IsAdmin
+  | IsAdminAction
 
   
 

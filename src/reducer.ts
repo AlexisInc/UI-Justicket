@@ -17,7 +17,10 @@ export type State = {
 
 export const defaultState: State = {
   concert : [],
-  billet : []
+  billet : [],
+  userAddress : '',
+  userBalance :-1,
+  isAdmin : false
 
 }
 
@@ -32,6 +35,9 @@ const reducer = (state: State | undefined, action: Actions)  => {
     case 'IS_ADMIN':
         return { ...state, isAdmin: action.isAdmin};
     case 'WALLET_CONNECTION':
+        console.log("from state")
+        console.log(action.address);
+        console.log(action.balance);
         return { ...state, userAddress: action.address, userBalance: action.balance};
 
 
@@ -50,11 +56,11 @@ export const balanceSelector= (state: State) => {
     return state.userBalance;
 };
 
-export const addressSelector= (state: State) => {
+export const addressSelector= (state: State)   => {
     return state.userAddress;
 };
 
-export const adminSelector= (state: State) => {
+export const adminSelector= (state: State)=> {
     return state.isAdmin;
 };
 

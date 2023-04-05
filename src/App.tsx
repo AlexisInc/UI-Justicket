@@ -11,24 +11,15 @@ import { store } from "./store.ts";
 function App() {
 
   return (
-
     <Provider store={store}>
-    <>
-    <>
-    <NavbarApp></NavbarApp>
-    <Outlet />
-
-
-  </>
-   
-    </>
-  </Provider>
-
-
-
-   
+      <>
+        <>
+          <NavbarApp />
+          <Outlet />
+        </>
+      </>
+    </Provider>
   )
-
 }
 
 export default App;

@@ -12,7 +12,7 @@ const Concert = ()=>{
           <section className="concerts">
               {concerts.map( concert => {
                   return (
-                    <Card className="concert">
+                    <Card className="concert" key={concert.title}>
                         <Card.Header as="h5">{concert.title}</Card.Header>
                         <Card.Body>
                             <Card.Title>{concert.artist}</Card.Title>

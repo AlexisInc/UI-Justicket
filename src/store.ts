@@ -1,6 +1,5 @@
-
-
 import { legacy_createStore as createStore, compose, applyMiddleware } from 'redux';
+// @ts-ignore
 import reducer, { State } from './reducer.ts';
 import { install, LoopReducer, StoreCreator } from 'redux-loop';
 import { createLogger } from 'redux-logger';

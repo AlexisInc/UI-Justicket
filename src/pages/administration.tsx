@@ -1,3 +1,4 @@
+// @ts-ignore
 import CreateConcert from "../lib/concert-form.tsx";
 
 

@@ -1,4 +1,5 @@
 import { Dispatch } from 'redux';
+// @ts-ignore
 import { isAdminAction } from '../action.ts';
 
 export async function checkIsAdmin(userAddress: string, dispatch: Dispatch) {

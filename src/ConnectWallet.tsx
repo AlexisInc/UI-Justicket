@@ -4,7 +4,9 @@ import { TezosToolkit } from "@taquito/taquito";
 import { Dispatch, SetStateAction, useState } from "react";
 import { Button } from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
+// @ts-ignore
 import { walletConnection,isAdminAction } from './action.ts';
+// @ts-ignore
 import { checkIsAdmin } from './service/adminService.ts';
 
 

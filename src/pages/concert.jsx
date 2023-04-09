@@ -22,63 +22,29 @@ const Concert = () => {
   }, [concert_nfts]);
 
   async function handleBuyTicket(contractAddress) {
-    console.log(wallet);
     tezos.setWalletProvider(wallet);
-    // Get the user's address
-    const userAddress = await wallet.getPKH();
-    // Prepare the transaction
     const contract = await tezos.wallet.at(
       'KT1TbPG9nVYxCPhJJQVKVewP4293mYnMsdS7'
     );
     const token = concert_nfts
       .find((elt) => (elt.address = 'KT1TbPG9nVYxCPhJJQVKVewP4293mYnMsdS7'))
       .nft.pop();
-    console.log(token);
 
-    const operation = await contract.methods
-      .buy_ticket(token)
-      .send({ from: userAddress });
-
-    // Request the user's signature
-    const signedOperation = await wallet.signOperation({
-      operationDetails: [operation],
-    });
-
-    // Broadcast the signed transaction
-    const hash = await tezos.rpc.sendOperation(signedOperation.opOb);
-    console.log(`Transaction broadcasted with hash ${hash}`);
-    console.log(operation);
+    const operation = await contract.methods.buy_ticket(token).send();
 
     dispatch(buy_nft(token, 'KT1TbPG9nVYxCPhJJQVKVewP4293mYnMsdS7'));
   }
 
   async function handleRefund(contractAddress) {
-    console.log(wallet);
     tezos.setWalletProvider(wallet);
-    // Get the user's address
-    const userAddress = await wallet.getPKH();
-    // Prepare the transaction
     const contract = await tezos.wallet.at(
       'KT1TbPG9nVYxCPhJJQVKVewP4293mYnMsdS7'
     );
     const token = concert_nfts
       .find((elt) => (elt.address = 'KT1TbPG9nVYxCPhJJQVKVewP4293mYnMsdS7'))
       .nft.pop();
-    console.log(token);
 
-    const operation = await contract.methods
-      .refund()
-      .send({ from: userAddress });
-
-    // Request the user's signature
-    const signedOperation = await wallet.signOperation({
-      operationDetails: [operation],
-    });
-
-    // Broadcast the signed transaction
-    const hash = await tezos.rpc.sendOperation(signedOperation.opOb);
-    console.log(`Transaction broadcasted with hash ${hash}`);
-    console.log(operation);
+    const operation = await contract.methods.refund().send();
 
     dispatch(buy_nft(token, 'KT1TbPG9nVYxCPhJJQVKVewP4293mYnMsdS7'));
   }

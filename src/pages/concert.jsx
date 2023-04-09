@@ -37,7 +37,7 @@ const Concert = () => {
 
     const operation = await contract.methods
       .buy_ticket(token)
-      .send({ amount: 1000, mutez: true, from: userAddress });
+      .send({ from: userAddress });
 
     // Request the user's signature
     const signedOperation = await wallet.signOperation({
@@ -68,7 +68,7 @@ const Concert = () => {
 
     const operation = await contract.methods
       .refund()
-      .send({ amount: 1000, mutez: true, from: userAddress });
+      .send({ from: userAddress });
 
     // Request the user's signature
     const signedOperation = await wallet.signOperation({

@@ -25,6 +25,7 @@ export type State = {
 type concert_nft = {
   address: string;
   nft: any[];
+  price?:number;
 };
 
 export const defaultState: State = {
@@ -62,13 +63,13 @@ const reducer = (state: State | undefined, action: Actions) => {
         (elt) => elt.address === action.adress
       );
       if (alreadyStored == null) {
-        concerts.push({ address: action.adress, nft: action.payload });
+        concerts.push({ address: action.adress, nft: action.payload, price: action.price});
       }
       return { ...state, concerts_nfts: concerts };
 
     case 'FETCH_DATA_CONCERT':
       //mock
-      const concertsAddress = ['KT1TbPG9nVYxCPhJJQVKVewP4293mYnMsdS7'];
+      const concertsAddress = ['KT1CYtT39PBcs3pEp66U76ET9PbtfdqDZGkJ'];
       const cmds = concertsAddress.map((element) =>
         cmdFetchNft(fetchConcertNftRequest(element))
       );

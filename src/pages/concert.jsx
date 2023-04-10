@@ -24,29 +24,43 @@ const Concert = () => {
   async function handleBuyTicket(contractAddress) {
     tezos.setWalletProvider(wallet);
     const contract = await tezos.wallet.at(
-      'KT1TbPG9nVYxCPhJJQVKVewP4293mYnMsdS7'
+      'KT1CYtT39PBcs3pEp66U76ET9PbtfdqDZGkJ'
     );
-    const token = concert_nfts
-      .find((elt) => (elt.address = 'KT1TbPG9nVYxCPhJJQVKVewP4293mYnMsdS7'))
-      .nft.pop();
 
-    const operation = await contract.methods.buy_ticket(token).send();
-
-    dispatch(buy_nft(token, 'KT1TbPG9nVYxCPhJJQVKVewP4293mYnMsdS7'));
+    const concert = concert_nfts
+      .find((elt) => (elt.address = 'KT1CYtT39PBcs3pEp66U76ET9PbtfdqDZGkJ'));
+    console.log(concert);
+    const buyed = false;
+    while(!buyed){
+        if(concert.nft.length===0){
+            buyed=true;
+        }
+        else{
+            try{
+                const token = concert.nft.pop();
+                const operation = await contract.methods.buy_ticket(token).send({amount: concert.price });
+                dispatch(buy_nft(token, 'KT1CYtT39PBcs3pEp66U76ET9PbtfdqDZGkJ'));
+                buyed = true;
+            }
+            catch{
+                concert.nft.pop();
+            }
+        }
+    }
   }
 
   async function handleRefund(contractAddress) {
     tezos.setWalletProvider(wallet);
     const contract = await tezos.wallet.at(
-      'KT1TbPG9nVYxCPhJJQVKVewP4293mYnMsdS7'
+      'KT1JXEthzfrNSS4jfjdYbyp9WM5mYbBcZbVC'
     );
     const token = concert_nfts
-      .find((elt) => (elt.address = 'KT1TbPG9nVYxCPhJJQVKVewP4293mYnMsdS7'))
+      .find((elt) => (elt.address = 'KT1JXEthzfrNSS4jfjdYbyp9WM5mYbBcZbVC'))
       .nft.pop();
 
-    const operation = await contract.methods.refund().send();
+    const operation = await contract.methods.createConcert(10,'tz1ikj8zfGbxrvh2hUmUyBc24y6DAJ65VVMT',1000000).send();
 
-    dispatch(buy_nft(token, 'KT1TbPG9nVYxCPhJJQVKVewP4293mYnMsdS7'));
+    //dispatch(create_concert(token, 'KT1JXEthzfrNSS4jfjdYbyp9WM5mYbBcZbVC'));
   }
 
   return (

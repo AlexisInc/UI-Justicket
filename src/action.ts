@@ -95,11 +95,13 @@ export const fetchConcertNftRequest = (
 
 export const fetchConcertNftCommit = (
   payload: any[],
-  adress: string
+  adress: string,
+  price: number,
 ): FetchConcertNftCommit => ({
   type: 'FETCH_CONCERT_NFT_COMMIT',
   adress: adress,
   payload,
+  price,
 });
 
 export const fetchConcertNftRollback = (

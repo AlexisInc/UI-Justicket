@@ -58,6 +58,7 @@ export type FetchConcertNftCommit = {
   type: 'FETCH_CONCERT_NFT_COMMIT';
   adress: string;
   payload: any[];
+  price: number;
 };
 
 export type FetchConcertNftRollback = {

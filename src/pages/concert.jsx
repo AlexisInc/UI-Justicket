@@ -116,7 +116,7 @@ const Concert = () => {
                     handleWithdraw(concert_nft.concert.contractAddress)
                   }
                 >
-                  Refund
+                  Withdraw
                 </Button>
               </Card.Body>
             </Card>

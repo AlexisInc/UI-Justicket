@@ -36,7 +36,8 @@ export const defaultState: State = {
   billet: [],
   userAddress: '',
   userBalance: -1,
-  isAdmin: true,
+  //passer isAdmin à true si jamais vous voulez tester sans être admin en BDD du back
+  isAdmin: false,
   concerts_nfts: [],
 };
 

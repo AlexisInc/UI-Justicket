@@ -49,6 +49,18 @@ const Concert = () => {
     //dispatch(create_concert(token, 'KT1JXEthzfrNSS4jfjdYbyp9WM5mYbBcZbVC'));
   }
 
+  async function handleWithdraw(contractAddress) {
+    tezos.setWalletProvider(wallet);
+    const contract = await tezos.wallet.at(contractAddress);
+    const token = concert_nfts
+      .find((elt) => (elt.address = contractAddress))
+      .nft.pop();
+
+    const operation = await contract.methods.withdraw().send();
+
+    //dispatch(create_concert(token, 'KT1JXEthzfrNSS4jfjdYbyp9WM5mYbBcZbVC'));
+  }
+
   return (
     <>
       <h1>Concerts</h1>
@@ -85,6 +97,14 @@ const Concert = () => {
                   variant="primary"
                   onClick={() =>
                     handleRefund(concert_nft.concert.contractAddress)
+                  }
+                >
+                  Refund
+                </Button>
+                <Button
+                  variant="primary"
+                  onClick={() =>
+                    handleWithdraw(concert_nft.concert.contractAddress)
                   }
                 >
                   Refund

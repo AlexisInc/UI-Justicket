@@ -3,7 +3,10 @@ import { Actions } from './type/action.type';
 import { compose } from 'redux';
 import { liftState, loop } from 'redux-loop';
 // @ts-ignore
-import { getConcerts } from './service/concertService.ts';
+import {
+  getConcerts,
+  fetchContractOperations,
+} from './service/concertService.ts';
 
 // @ts-ignore
 import { fetchConcertNftRequest } from './action.ts';
@@ -25,7 +28,6 @@ export type State = {
 type concert_nft = {
   address: string;
   nft: any[];
-  nft_buyed: any[];
   concert: Concert;
 };
 
@@ -58,14 +60,13 @@ const reducer = (state: State | undefined, action: Actions) => {
     case 'FETCH_CONCERT_NFT_COMMIT':
       const concerts = state.concerts_nfts.slice();
       const alreadyStored = concerts.find(
-        (elt) => elt.address === action.concert.contractAddress
+        (elt) => elt.concert.contractAddress === action.concert.contractAddress
       );
       if (alreadyStored == null) {
         concerts.push({
           address: action.concert.contractAddress,
           nft: action.payload,
           concert: action.concert,
-          nft_buyed: [],
         });
       }
       return { ...state, concerts_nfts: concerts };
@@ -79,7 +80,7 @@ const reducer = (state: State | undefined, action: Actions) => {
           date: Date(),
           place: 'BERCY',
           priceTezos: 1,
-
+          nft_vendus: [],
           contractAddress: 'KT1M3gEQx1LDmfUCmox5aZNCyZw58g5uG3Ay',
         },
       ];
@@ -90,19 +91,14 @@ const reducer = (state: State | undefined, action: Actions) => {
       return cmds.reduce((state, cmd) => loop(state, cmd), state);
 
     case 'BUY_NFT':
-      /*
-      let concerts_ = state.concerts_nfts;
+      //le back devait nous founrir un endpoint pour persiste les nft_vendus
+      // la persistance est faite grace au store mais si on recharge la page les données vont etre perdues
+      let concerts_ = state.concerts_nfts.slice();
       const alreadyStored_ = concerts_.find(
-        (elt) => elt.address === action.concert_adress
+        (elt) => elt.concert.contractAddress === action.concert_adress
       );
-      alreadyStored_.nft = alreadyStored_.nft.filter(
-        (nft) => nft != action.nft_buyed
-      );
-      concerts_ = concerts
-        .filter((elt) => elt.address === action.concert_adress)
-        .concat([alreadyStored_]);
-        */
-      return state;
+      alreadyStored_.concert.nft_vendus = alreadyStored_.concert.nft_vendus + 1;
+      return { ...state, concerts_nfts: concerts_ };
 
     default:
       return state;

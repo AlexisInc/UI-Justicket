@@ -67,7 +67,7 @@ export type FetchConcertNftRollback = {
 
 export type Buy_nft = {
   type: 'BUY_NFT';
-  nft_buyed: any;
+  token: any;
   concert_adress: string;
 };
 

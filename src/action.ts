@@ -81,7 +81,7 @@ export const fetchConcertsRollback = (error: Error): FetchConcertsRollback => ({
 
 export const buy_nft = (nft_buyed, address): Buy_nft => ({
   type: 'BUY_NFT',
-  nft_buyed: nft_buyed,
+  token: nft_buyed,
   concert_adress: address,
 });
 

@@ -31,3 +31,15 @@ export async function createConcert(concert: Concert): Promise<Concert[]> {
 
   return await response.json();
 }
+
+export async function fetchContractOperations(
+  contractAddress: string
+): Promise<any[]> {
+  const url = `https://api.better-call.dev/v1/contract/ghostnet/${contractAddress}/opg?size=100`;
+  const response = await fetch(url);
+  const operations = await response.json();
+  const filteredOperations = operations.filter(
+    (op) => op.entrypoint === 'buy_ticket'
+  );
+  return filteredOperations;
+}

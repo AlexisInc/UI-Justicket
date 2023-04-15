@@ -16,47 +16,38 @@ const Concert = () => {
   }, []);
 
   async function handleBuyTicket(contractAddress) {
-    tezos.setWalletProvider(wallet);
-    const contract = await tezos.wallet.at(
-      'KT1CYtT39PBcs3pEp66U76ET9PbtfdqDZGkJ'
-    );
+    if (wallet == null) {
+      alert('connectez vous a votre wallet !');
+    } else {
+      tezos.setWalletProvider(wallet);
+      const contract = await tezos.wallet.at(contractAddress);
 
-    const concert = concert_nfts.find(
-      (elt) => (elt.address = 'KT1CYtT39PBcs3pEp66U76ET9PbtfdqDZGkJ')
-    );
-    console.log(concert);
-    const buyed = false;
+      const concert_nft = concert_nfts.find(
+        (elt) => (elt.address = contractAddress)
+      );
+      const nftNotBuyed = concert_nft.nft.slice(
+        0,
+        concert_nft.nft.length - concert_nft.concert.nft_vendus
+      );
+      console.log(nftNotBuyed);
+      const token = nftNotBuyed.pop();
+      const operation = await contract.methods
+        .buy_ticket(token)
+        .send({ amount: concert_nft.concert.priceTezos });
 
-    /*
-    while(!buyed){
-        if(concert.nft.length===0){
-            buyed=true;
-        }
-        else{
-            try{
-                const token = concert.nft.pop();
-                const operation = await contract.methods.buy_ticket(token).send({amount: concert.price });
-                dispatch(buy_nft(token, 'KT1CYtT39PBcs3pEp66U76ET9PbtfdqDZGkJ'));
-                buyed = true;
-            }
-            catch{
-                concert.nft.pop();
-            }
-        }
-    }*/
+      dispatch(buy_nft(token, contractAddress));
+    }
   }
 
   async function handleRefund(contractAddress) {
     tezos.setWalletProvider(wallet);
-    const contract = await tezos.wallet.at(
-      'KT1JXEthzfrNSS4jfjdYbyp9WM5mYbBcZbVC'
-    );
+    const contract = await tezos.wallet.at(contractAddress);
     const token = concert_nfts
-      .find((elt) => (elt.address = 'KT1JXEthzfrNSS4jfjdYbyp9WM5mYbBcZbVC'))
+      .find((elt) => (elt.address = contractAddress))
       .nft.pop();
 
     const operation = await contract.methods
-      .createConcert(10, 'tz1ikj8zfGbxrvh2hUmUyBc24y6DAJ65VVMT', 1000000)
+      .createConcert(10, contractAddress, 1000000)
       .send();
 
     //dispatch(create_concert(token, 'KT1JXEthzfrNSS4jfjdYbyp9WM5mYbBcZbVC'));
@@ -84,7 +75,7 @@ const Concert = () => {
 
                 <Card.Text>
                   Places disponibles :
-                  {concert_nft.nft.length - concert_nft.nft_buyed.length}
+                  {concert_nft.nft.length - concert_nft.concert.nft_vendus}
                 </Card.Text>
                 <Button
                   variant="primary"

@@ -1,15 +1,15 @@
-
-import "./App.css";
+import './App.css';
 // @ts-ignore
-import NavbarApp   from "./lib/navbar-app.tsx";
-import { Outlet} from 'react-router-dom';
+import NavbarApp from './lib/navbar-app.tsx';
+import { Outlet } from 'react-router-dom';
 // @ts-ignore
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from 'react-redux';
 // @ts-ignore
-import { store } from "./store.ts";
+import { store } from './store.ts';
+import { useEffect } from 'react';
+import { fetchDataConcert } from './action.ts';
 
 function App() {
-
   return (
     <Provider store={store}>
       <>
@@ -19,7 +19,7 @@ function App() {
         </>
       </>
     </Provider>
-  )
+  );
 }
 
 export default App;

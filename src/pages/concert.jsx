@@ -7,19 +7,13 @@ import { nftSelector, walletSelector } from '../reducer.ts';
 import { TezosToolkit } from '@taquito/taquito';
 
 const Concert = () => {
-  const concerts = concertData;
   const dispatch = useDispatch();
   const concert_nfts = useSelector(nftSelector);
   const wallet = useSelector(walletSelector);
   const tezos = new TezosToolkit('https://ghostnet.tezos.marigold.dev');
-
   useEffect(() => {
     dispatch(fetchDataConcert());
   }, []);
-  useEffect(() => {
-    console.log('Nouvelle valeur de concert_nfts :', concert_nfts);
-    // Appeler votre méthode ici ...
-  }, [concert_nfts]);
 
   async function handleBuyTicket(contractAddress) {
     tezos.setWalletProvider(wallet);
@@ -27,10 +21,13 @@ const Concert = () => {
       'KT1CYtT39PBcs3pEp66U76ET9PbtfdqDZGkJ'
     );
 
-    const concert = concert_nfts
-      .find((elt) => (elt.address = 'KT1CYtT39PBcs3pEp66U76ET9PbtfdqDZGkJ'));
+    const concert = concert_nfts.find(
+      (elt) => (elt.address = 'KT1CYtT39PBcs3pEp66U76ET9PbtfdqDZGkJ')
+    );
     console.log(concert);
     const buyed = false;
+
+    /*
     while(!buyed){
         if(concert.nft.length===0){
             buyed=true;
@@ -46,7 +43,7 @@ const Concert = () => {
                 concert.nft.pop();
             }
         }
-    }
+    }*/
   }
 
   async function handleRefund(contractAddress) {
@@ -58,7 +55,9 @@ const Concert = () => {
       .find((elt) => (elt.address = 'KT1JXEthzfrNSS4jfjdYbyp9WM5mYbBcZbVC'))
       .nft.pop();
 
-    const operation = await contract.methods.createConcert(10,'tz1ikj8zfGbxrvh2hUmUyBc24y6DAJ65VVMT',1000000).send();
+    const operation = await contract.methods
+      .createConcert(10, 'tz1ikj8zfGbxrvh2hUmUyBc24y6DAJ65VVMT', 1000000)
+      .send();
 
     //dispatch(create_concert(token, 'KT1JXEthzfrNSS4jfjdYbyp9WM5mYbBcZbVC'));
   }
@@ -67,24 +66,39 @@ const Concert = () => {
     <>
       <h1>Concerts</h1>
       <section className="concerts">
-        {concerts.map((concert) => {
+        {concert_nfts.map((concert_nft, i) => {
           return (
-            <Card className="concert" key={concert.title}>
-              <Card.Header as="h5">{concert.title}</Card.Header>
+            <Card key={concert_nft.concert.title} className="concert" key={i}>
+              <Card.Header as="h5">{concert_nft.concert.title}</Card.Header>
               <Card.Body>
-                <Card.Title>{concert.artist}</Card.Title>
-                <Card.Text>Nombre de places : {concert.capacity}</Card.Text>
-                <Card.Text>Date du concert : {concert.date}</Card.Text>
-                <Card.Text>Prix : {concert.priceTezos} Tz</Card.Text>
+                <Card.Title>{concert_nft.concert.artist}</Card.Title>
+                <Card.Text>
+                  Nombre de places : {concert_nft.concert.capacity}
+                </Card.Text>
+                <Card.Text>
+                  Date du concert : {concert_nft.concert.date}
+                </Card.Text>
+                <Card.Text>
+                  Prix : {concert_nft.concert.priceTezos} Tz
+                </Card.Text>
+
+                <Card.Text>
+                  Places disponibles :
+                  {concert_nft.nft.length - concert_nft.nft_buyed.length}
+                </Card.Text>
                 <Button
                   variant="primary"
-                  onClick={() => handleBuyTicket(concert.contractAddress)}
+                  onClick={() =>
+                    handleBuyTicket(concert_nft.concert.contractAddress)
+                  }
                 >
                   Acheter un billet
                 </Button>
                 <Button
                   variant="primary"
-                  onClick={() => handleRefund(concert.contractAddress)}
+                  onClick={() =>
+                    handleRefund(concert_nft.concert.contractAddress)
+                  }
                 >
                   Refund
                 </Button>

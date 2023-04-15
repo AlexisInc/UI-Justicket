@@ -25,7 +25,8 @@ export type State = {
 type concert_nft = {
   address: string;
   nft: any[];
-  price?:number;
+  nft_buyed: any[];
+  concert: Concert;
 };
 
 export const defaultState: State = {
@@ -33,10 +34,9 @@ export const defaultState: State = {
   billet: [],
   userAddress: '',
   userBalance: -1,
-  isAdmin: false,
+  isAdmin: true,
   concerts_nfts: [],
 };
-const tezos = new TezosToolkit('https://ghostnet.tezos.marigold.dev');
 
 const reducer = (state: State | undefined, action: Actions) => {
   if (!state) return defaultState; // mandatory by redux
@@ -48,8 +48,6 @@ const reducer = (state: State | undefined, action: Actions) => {
     case 'IS_ADMIN':
       return { ...state, isAdmin: action.isAdmin };
     case 'WALLET_CONNECTION':
-      console.log(state);
-      console.log(action.wallet);
       return {
         ...state,
         userAddress: action.address,
@@ -58,19 +56,35 @@ const reducer = (state: State | undefined, action: Actions) => {
       };
 
     case 'FETCH_CONCERT_NFT_COMMIT':
-      const concerts = state.concerts_nfts;
+      const concerts = state.concerts_nfts.slice();
       const alreadyStored = concerts.find(
-        (elt) => elt.address === action.adress
+        (elt) => elt.address === action.concert.contractAddress
       );
       if (alreadyStored == null) {
-        concerts.push({ address: action.adress, nft: action.payload, price: action.price});
+        concerts.push({
+          address: action.concert.contractAddress,
+          nft: action.payload,
+          concert: action.concert,
+          nft_buyed: [],
+        });
       }
       return { ...state, concerts_nfts: concerts };
 
     case 'FETCH_DATA_CONCERT':
-      //mock
-      const concertsAddress = ['KT1CYtT39PBcs3pEp66U76ET9PbtfdqDZGkJ'];
-      const cmds = concertsAddress.map((element) =>
+      const concerts_mock = [
+        {
+          title: 'DAMSO SHOW',
+          artist: 'THE DAMSO',
+          capacity: '10',
+          date: Date(),
+          place: 'BERCY',
+          priceTezos: 1,
+
+          contractAddress: 'KT1M3gEQx1LDmfUCmox5aZNCyZw58g5uG3Ay',
+        },
+      ];
+
+      const cmds = concerts_mock.map((element) =>
         cmdFetchNft(fetchConcertNftRequest(element))
       );
       return cmds.reduce((state, cmd) => loop(state, cmd), state);
@@ -111,7 +125,7 @@ export const adminSelector = (state: State) => {
   return state.isAdmin;
 };
 
-export const nftSelector = (state: State): concert_nft[] => {
+export const nftSelector = (state: State) => {
   return state.concerts_nfts;
 };
 

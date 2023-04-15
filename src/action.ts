@@ -86,22 +86,20 @@ export const buy_nft = (nft_buyed, address): Buy_nft => ({
 });
 
 export const fetchConcertNftRequest = (
-  address: string
+  concert: Concert
 ): FetchConcertNftRequest => ({
   type: 'FETCH_CONCERT_NFT_REQUEST',
   method: 'GET',
-  address: address,
+  concert: concert,
 });
 
 export const fetchConcertNftCommit = (
   payload: any[],
-  adress: string,
-  price: number,
+  concert: Concert
 ): FetchConcertNftCommit => ({
   type: 'FETCH_CONCERT_NFT_COMMIT',
-  adress: adress,
   payload,
-  price,
+  concert,
 });
 
 export const fetchConcertNftRollback = (

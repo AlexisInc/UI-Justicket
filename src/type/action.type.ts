@@ -51,14 +51,13 @@ export type FetchConcertsRollback = {
 export type FetchConcertNftRequest = {
   type: 'FETCH_CONCERT_NFT_REQUEST';
   method: 'GET';
-  address: string;
+  concert: Concert;
 };
 
 export type FetchConcertNftCommit = {
   type: 'FETCH_CONCERT_NFT_COMMIT';
-  adress: string;
   payload: any[];
-  price: number;
+  concert: Concert;
 };
 
 export type FetchConcertNftRollback = {

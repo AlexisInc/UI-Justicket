@@ -31,33 +31,42 @@ const Concert = () => {
       );
       console.log(nftNotBuyed);
       const token = nftNotBuyed.pop();
-      const operation = await contract.methods.buy_ticket(token).send();
+      const operation = await contract.methods
+        .buy_ticket(token)
+        .send({ amount: concert_nft.concert.priceTezos });
 
       dispatch(buy_nft(token, contractAddress));
     }
   }
 
   async function handleRefund(contractAddress) {
-    tezos.setWalletProvider(wallet);
-    const contract = await tezos.wallet.at(contractAddress);
-    const token = concert_nfts
-      .find((elt) => (elt.address = contractAddress))
-      .nft.pop();
+    if (wallet == null) {
+      alert('connectez vous a votre wallet !');
+    } else {
+      tezos.setWalletProvider(wallet);
+      const contract = await tezos.wallet.at(contractAddress);
+      const token = concert_nfts
+        .find((elt) => (elt.address = contractAddress))
+        .nft.pop();
 
-    const operation = await contract.methods.refund(contractAddress).send();
+      const operation = await contract.methods.refund(contractAddress).send();
 
-    //dispatch(create_concert(token, 'KT1JXEthzfrNSS4jfjdYbyp9WM5mYbBcZbVC'));
+      //dispatch(create_concert(token, 'KT1JXEthzfrNSS4jfjdYbyp9WM5mYbBcZbVC'));
+    }
   }
 
   async function handleWithdraw(contractAddress) {
-    tezos.setWalletProvider(wallet);
-    const contract = await tezos.wallet.at(contractAddress);
-    const token = concert_nfts
-      .find((elt) => (elt.address = contractAddress))
-      .nft.pop();
+    if (wallet == null) {
+      alert('connectez vous a votre wallet !');
+    } else {
+      tezos.setWalletProvider(wallet);
+      const contract = await tezos.wallet.at(contractAddress);
+      const token = concert_nfts
+        .find((elt) => (elt.address = contractAddress))
+        .nft.pop();
 
-    const operation = await contract.methods.withdraw().send();
-
+      const operation = await contract.methods.withdraw().send();
+    }
     //dispatch(create_concert(token, 'KT1JXEthzfrNSS4jfjdYbyp9WM5mYbBcZbVC'));
   }
 

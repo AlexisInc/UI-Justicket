@@ -31,9 +31,7 @@ const Concert = () => {
       );
       console.log(nftNotBuyed);
       const token = nftNotBuyed.pop();
-      const operation = await contract.methods
-        .buy_ticket(token)
-        .send({ amount: concert_nft.concert.priceTezos });
+      const operation = await contract.methods.buy_ticket(token).send();
 
       dispatch(buy_nft(token, contractAddress));
     }
@@ -46,9 +44,7 @@ const Concert = () => {
       .find((elt) => (elt.address = contractAddress))
       .nft.pop();
 
-    const operation = await contract.methods
-      .createConcert(10, contractAddress, 1000000)
-      .send();
+    const operation = await contract.methods.refund(contractAddress).send();
 
     //dispatch(create_concert(token, 'KT1JXEthzfrNSS4jfjdYbyp9WM5mYbBcZbVC'));
   }

@@ -10,23 +10,10 @@ const Billet = () => {
 
   useEffect(() => {
     console.log('loaad');
-    async function getNft() {
-      if (wallet != null) {
-        tezos.setWalletProvider(wallet);
-        // Load the contract with its address
-        const contractAddress = 'KT1TbPG9nVYxCPhJJQVKVewP4293mYnMsdS7';
-        const contract = await tezos.wallet.at(contractAddress);
-        // Get the user's address
-        const userAddress = await wallet.getPKH();
-        // Call the contract's tokens_of_owner method to get the list of NFTs owned by the user
-        const tokens = await contract.methods
-          .tokens_of_owner(userAddress)
-          .call();
-        console.log(tokens);
-      }
-    }
+    async function getNft() {}
+
     getNft();
-  }, [wallet]);
+  }, []);
 
   return (
     <>

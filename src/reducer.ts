@@ -36,7 +36,8 @@ export const defaultState: State = {
   billet: [],
   userAddress: '',
   userBalance: -1,
-  isAdmin: true,
+  //passer isAdmin à true si jamais vous voulez tester sans être admin en BDD du back
+  isAdmin: false,
   concerts_nfts: [],
 };
 
@@ -79,9 +80,9 @@ const reducer = (state: State | undefined, action: Actions) => {
           capacity: '10',
           date: Date(),
           place: 'BERCY',
-          priceTezos: 1,
+          priceTezos: 0.1,
           nft_vendus: [],
-          contractAddress: 'KT1M3gEQx1LDmfUCmox5aZNCyZw58g5uG3Ay',
+          contractAddress: 'KT1DtH9PQrV1vjcETUY2KPYQm9i6ufCGwbqq',
         },
       ];
 

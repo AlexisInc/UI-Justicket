@@ -42,7 +42,8 @@ const ConnectButton = ({
       console.log(userAddress);
       console.log(wallet);
       dispatch(walletConnection(userAddress, balance.toNumber(), wallet));
-      //await checkIsAdmin(userAddress, dispatch);
+      //commenter la ligne ci dessous si vous voulez avoir accès à toutes les fonctionnalités sans être admin dans la bdd du back
+      await checkIsAdmin(userAddress, dispatch);
     } catch (error) {
       console.log(error);
     }
@@ -56,37 +57,3 @@ const ConnectButton = ({
 };
 
 export default ConnectButton;
-
-/*
-useEffect(() => {
-  
-    Tezos.setWalletProvider(wallet);
-    (async () => {
-      const activeAccount = await wallet.client.getActiveAccount();
-      if (activeAccount) {
-    
-        const balance = await Tezos.tz.getBalance(activeAccount.address);
-        dispatch(walletConnection(activeAccount.address,balance.toNumber()))
-
-        const myHeaders = new Headers();
-        myHeaders.append("Content-Type", "text/plain");
-        myHeaders.append("X-Custom-Header", "ProcessThisImmediately");
-          const formData: FormData = new FormData();
-          formData.append('address', userAddress)
-        const myRequest = new Request('admin/is_admin', {
-            method: 'POST',
-            headers: myHeaders,
-            mode: 'cors',
-            cache: 'default',
-            body: formData
-        });
-        fetch(myRequest)
-            .then((response) => response.json())
-            .then( (data) => {
-                dispatch(isAdminAction(data.isAdmin))
-            })
-      }
-    })();
-    
-  }, );
-  */
